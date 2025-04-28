@@ -1,0 +1,16 @@
+{
+    "name": "saruf/wp-cpt-book-manager",
+    "description": "This is a simple custom post type for book manager",
+    "autoload": {
+        "psr-4": {
+            "Saruf\\WpCptBookManager\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Saruf",
+            "email": "raqibul.dev@gmail.com"
+        }
+    ],
+    "require": {}
+}
