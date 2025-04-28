@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace Saruf\WpCptBookManager;
 
+use Saruf\WpCptBookManager\Init\AuthorTaxonomy;
+use Saruf\WpCptBookManager\Init\BookPostType;
+use Saruf\WpCptBookManager\Init\FilterHandler;
+use Saruf\WpCptBookManager\Init\GenreTaxonomy;
+use Saruf\WpCptBookManager\Init\OtherFields;
+
 /** 
  * Final Bookmanager  handler class
  */
@@ -75,6 +81,10 @@ final class BookManager
      */
     public function init_classes(): void
     {
-        new PostTypeHandler();   
+        new BookPostType();
+        new AuthorTaxonomy();
+        new GenreTaxonomy();  
+        new OtherFields();
+        new FilterHandler(); 
     }
 }

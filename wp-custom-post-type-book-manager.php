@@ -20,6 +20,7 @@ define('WP_CPT_BOOK_MANAGER_FILE', __FILE__);
 define('WP_CPT_BOOK_MANAGER_DIR', __DIR__);
 define('WP_CPT_BOOK_MANAGER_INCLUDES', WP_CPT_BOOK_MANAGER_DIR . '/includes');
 define('WP_CPT_BOOK_MANAGER_URL', plugin_dir_url(WP_CPT_BOOK_MANAGER_FILE));
+define('WP_CPT_NAME', 'wp_cpt_book');
 
 /**
  * Register the "book" custom post type
