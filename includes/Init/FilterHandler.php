@@ -14,6 +14,7 @@ class FilterHandler
     private function init_hooks()
     {
         add_action('pre_get_posts', [$this, 'filter_books_by_author_genre_rating']);
+        add_action('restrict_manage_posts', [$this, 'add_filter_fields']);
     }
 
     public function filter_books_by_author_genre_rating($query)
@@ -53,5 +54,51 @@ class FilterHandler
                 ],
             ]);
         }
+    }
+
+    public function add_filter_fields()
+    {
+        global $typenow;
+
+        if ($typenow !== WP_CPT_NAME) {
+            return;
+        }
+
+        $author_taxonomy = WP_CPT_NAME . '_author';
+        $genre_taxonomy = WP_CPT_NAME . '_genre';
+
+        $selected_author = $_GET[$author_taxonomy] ?? '';
+        $selected_genre = $_GET[$genre_taxonomy] ?? '';
+        $selected_rating = $_GET[WP_CPT_NAME . '_rating'] ?? '';
+
+        wp_dropdown_categories([
+            'show_option_all' => __('All Authors', 'textdomain'),
+            'taxonomy'        => $author_taxonomy,
+            'name'            => $author_taxonomy,
+            'orderby'         => 'name',
+            'selected'        => $selected_author,
+            'hierarchical'    => true,
+            'depth'           => 1,
+            'show_count'      => true,
+            'hide_empty'      => false,
+        ]);
+
+        wp_dropdown_categories([
+            'show_option_all' => __('All Genres', 'textdomain'),
+            'taxonomy'        => $genre_taxonomy,
+            'name'            => $genre_taxonomy,
+            'orderby'         => 'name',
+            'selected'        => $selected_genre,
+            'hierarchical'    => true,
+            'depth'           => 1,
+            'show_count'      => true,
+            'hide_empty'      => false,
+        ]);
+
+        echo '<input type="number" 
+            name="' . esc_attr(WP_CPT_NAME . '_rating') . '" 
+            value="' . esc_attr($selected_rating) . '" 
+            placeholder="Min Rating" 
+            style="width: 120px; margin-left: 10px;" />';
     }
 }

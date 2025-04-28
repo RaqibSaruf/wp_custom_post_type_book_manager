@@ -78,7 +78,7 @@ class AuthorTaxonomy
 
             $existing_term = term_exists($new_author_name, $taxonomy);
 
-            if ($existing_term === 0 || $existing_term === null) {
+            if (!$existing_term) {
                 $new_term = wp_insert_term($new_author_name, $taxonomy);
 
                 if (!is_wp_error($new_term) && isset($new_term['term_id'])) {
